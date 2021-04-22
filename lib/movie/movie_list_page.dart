@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_profile/movie/movie_item_model.dart';
@@ -15,9 +17,9 @@ class EventMovieListPageState extends State<EventMovieListPage> {
   List<MovieItem> movieList = [];
 
   void _fetchData() async {
-    movieList = await Future.delayed(Duration(milliseconds: 5), (){
+    movieList = await Future.delayed(Duration(milliseconds: 800), (){
       List<MovieItem> temp = [];
-      String body = '{ "list": [{ "name": "Hello, shanghai"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}]}';
+      String body = '{ "list": [{ "name": "Hello, shanghai"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}, {"name": "hello, beijing"},{"name": "hello, tianjin"}, {"name": "hello, chengdu"}]}';
       Map<String, dynamic> parsedJson = json.decode(body);
       for (int i = 0; i < parsedJson['list'].length; i++) {
         Map<String, dynamic> movieItemJson = parsedJson['list'][i];
@@ -88,6 +90,9 @@ class MovieItemWidgetState extends State<MovieItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Timeline.startSync("item build wangkai");
+    sleep(Duration(milliseconds: 20));
+    Timeline.finishSync();
     return GestureDetector(
       onTap: () {
         movieItem.selected = !movieItem.selected;
