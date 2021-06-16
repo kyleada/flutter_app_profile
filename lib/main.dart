@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const ValueKey('newPageFab'),
         onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> new EventMovieListPage()));},
         tooltip: 'Increment',
         child: Icon(Icons.add),
